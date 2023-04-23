@@ -11,23 +11,18 @@ jobs:
         platform:
         - name: linux
           task: build-binaries-linux
-        - name: windows
-          task: build-binaries-windows
-        - name: osx
-          task: build-binaries-darwin
     name: build binaries for ${{ matrix.platform.name }}
     steps:
     - name: Harden Runner
-      uses: step-security/harden-runner@rc
+      uses: step-security/harden-runner@int
       with:
         disable-sudo: true
         egress-policy: block
         allowed-endpoints: >
           github.com:443
-          proxy.golang.org:443
+          *.golang.org:443
           registry.yarnpkg.com:443
           storage.googleapis.com:443
-          sum.golang.org:443
 
     - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
       with:
